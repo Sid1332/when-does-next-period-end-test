@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>When does next period end?</title>
+  <style>
+		.centered
+		{
+			text-align: center;
+		}
+
+	</style>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css
+" rel="stylesheet">
+	<link rel="icon" type="image/png" href="logo.png">
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg bg-body-tertiary">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="">
+				<img src="logo.png" alt="logo" height="30">
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav me-auto mb2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link active" href="">When does this period end?</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="next.html">When does next period start?</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="lunches.html">Set lunches.</a>
+					</li>
+				</ul>
+				<form class="d-flex" role="search" method="get" action="./lookup.html">
+					<input class="form-control me-2" type="time" placeholder="Time" aria-label="Search" name="time">
+					<button class="btn btn-outline-success" type="submit">Find</button>
+				</form>
+			</div>
+		</div>
+	</nav>
+
+	<br>
+
+   <h3 id="time" class="centered">;p</h3>
+   <p class="centered">Made by Siddhu Guggilam (No stealing)</p>
+
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+   <script>
+		function checkTime() 
+		{
+			let cookies = {};
+			if (document.cookie == "") 
+			{
+				cookies.first = true;
+				cookies.second = true;
+				cookies.third = true;
+				cookies.fourth = true;
+			} 
+		   	else
+			{
+				let cookiesList = document.cookie.split("; ");
+				for (i in cookiesList)
+				{
+				    cookies[cookiesList[i].split("=")[0]] = cookiesList[i].split("=")[1] == 'true';
+				}
+			}
+			
+			let today = new Date();
+			let hours = today.getHours();
+			let minutes = today.getMinutes();
+			let text = document.getElementById("time");
+			// text.innerHTML = hours + ":" + minutes;
+			// console.log(text)
+			if ((hours < 9) || (hours == 9 && minutes < 42))
+			{
+				let h = 9 - hours;
+				let m = 42 - minutes;
+				if (m < 0)
+				{
+					h--;
+					m += 60;
+				}
+				text.innerHTML = h + " hours " + m + " minutes till 1/2 period ends.";
+			}
+			else if ((hours < 11) || (hours == 11 && minutes < 15))
+			{
+				let h = 11 - hours;
+				let m = 15 - minutes;
+				if (m < 0)
+				{
+					h--;
+					m += 60;
+				}
+				text.innerHTML = h + " hours " + m + " minutes till 3/4 period ends. ";
+				if ((hours < 10) || (hours == 10 && minutes < 29))
+				{
+					let h2 = 10 - hours;
+					let m2 = 29 - minutes;
+					if (m2 < 0)
+					{
+						h2--;
+						m2 += 60;
+					}
+					text.innerHTML = text.innerHTML + h2 + " hours " + m2 + " minutes till Rotation 1 ends.";
+				}
+				else
+				{
+					text.innerHTML = text.innerHTML + "Rotation 2 will end at the same time. ";
+				}
+			}
+			else if ((hours < 13) || (hours == 13 && minutes < 22))
+			{
+				let h = 13 - hours;
+				let m = 22 - minutes;
+				if (m < 0)
+				{
+					h--;
+					m += 60;
+				}
+				text.innerHTML = h + " hours " + m + " minutes till 5/6 period ends. ";
+				if (((hours < 11) || (hours == 11 && minutes < 48)) && cookies.second)
+				{
+					let h2 = 11 - hours;
+					let m2 = 48 - minutes;
+					if (m2 < 0)
+					{
+						h2--;
+						m2 += 60;
+					}
+					text.innerHTML = text.innerHTML + h2 + " hours " + m2 + " minutes till 2nd lunch starts. "
+				}
+				if (((hours < 12) || (hours == 12 && minutes < 20)) && cookies.third)
+				{
+					let h2 = 12 - hours;
+					let m2 = 20 - minutes;
+					if (m2 < 0)
+					{
+						h2--;
+						m2 += 60;
+					}
+					text.innerHTML = text.innerHTML + h2 + " hours " + m2 + " minutes till 3rd lunch starts. "
+				}
+				if (((hours < 12) || (hours == 12 && minutes < 52)) && cookies.fourth)
+				{
+					let h2 = 12 - hours;
+					let m2 = 52 - minutes;
+					if (m2 < 0)
+					{
+						h2--;
+						m2 += 60;
+					}
+					text.innerHTML = text.innerHTML + h2 + " hours " + m2 + " minutes till 4th lunch starts. "
+				}
+			}
+			else if ((hours < 14) || (hours == 14 && minutes < 55))
+			{
+				let h = 14 - hours;
+				let m = 55 - minutes;
+				if (m < 0)
+				{
+					h--;
+					m += 60;
+				}
+				text.innerHTML = h + " hours " + m + " minutes till 7/8 period ends.";
+			}
+			else
+			{
+				text.innerHTML = "School is over!";
+			}
+		}
+
+		checkTime()
+
+		setInterval(checkTime, 5000)
+	</script>
+</body>
+
+</html>
